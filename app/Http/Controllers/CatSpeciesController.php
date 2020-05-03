@@ -15,7 +15,7 @@ class CatSpeciesController extends Controller
         $this->key = 'route_' . Str::slug(\request()->url());
     }
 
-    public function showThreeCats()
+    public function showThreeCats($n)
     {
         if (Cache::has($this->key)) {
             $cats = Cache::get($this->key);
@@ -24,14 +24,17 @@ class CatSpeciesController extends Controller
             Cache::put($this->key, $cats, 60);
         }
 
-        return view('cats', ['cats' => $cats]);
+        $logsCont = new LogsController();
+        $logsCont->storePageVisit($n, $cats);
+
+        return view('cats', ['cats' => $cats, 'countAll' => $logsCont->getCountAll(), 'countN' => $logsCont->getCountN($n)]);
     }
 
     private function getSelectedCats()
     {
         $allCats = $this->getCatsArray();
 
-        $count = count($allCats);
+        $count = count($allCats) - 1;
 
         $cats[1] = $allCats[rand(0, $count)];
         $cats[2] = $allCats[rand(0, $count)];
@@ -56,7 +59,7 @@ class CatSpeciesController extends Controller
         $cats = [];
 
         while (feof($file) === false) {
-            $cats[] = fgets($file);
+            $cats[] = trim(fgets($file));
         }
 
         fclose($file);
