@@ -75,6 +75,10 @@
                     <div>{{ $cats[2] }}</div>
                     <div>{{ $cats[3] }}</div>
                 </div>
+                <div>
+                    <h4>CountAll: {{ $countAll }}</h4>
+                    <h4>CountN: {{ $countN }}</h4>
+                </div>
             </div>
         </div>
     </body>
