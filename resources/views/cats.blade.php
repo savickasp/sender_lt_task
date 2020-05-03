@@ -71,9 +71,9 @@
                 </div>
 
                 <div class="links">
-                    <div>{{ $cat1 }}</div>
-                    <div>{{ $cat2 }}</div>
-                    <div>{{ $cat3 }}</div>
+                    <div>{{ $cats[1] }}</div>
+                    <div>{{ $cats[2] }}</div>
+                    <div>{{ $cats[3] }}</div>
                 </div>
             </div>
         </div>
