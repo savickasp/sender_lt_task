@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{n}', 'CatSpeciesController@showThreeCats');
+Route::get('/{n}', 'CatSpeciesController@showThreeCats')->middleware('validate.numberN');
